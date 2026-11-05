@@ -93,7 +93,7 @@ function renderWordPicture(l,view,i,w){
 }
 function renderModernLesson(l,target) {
   const root=$(target);
-  const storedView=(state.sessionViews||{})[l.date]||"am";const view=(storedView==="pm"&&!!l.evening)?"pm":"am";
+  const storedView=(state.sessionViews||{})[l.date]||"am";const view=(storedView==="pm"||(!l.morning&&!!l.evening))?"pm":"am";
   let session=view==="pm"?l.evening:l.morning;
   if (!session && !l.morning) session=l.evening;
   const header='<div class="card" style="margin-bottom:10px"><span class="eyebrow">DAY '+l.day+' · '+l.date+'</span><h2>그림을 보고 영어로 말하는 다이어리</h2><p class="muted small">먼저 그림에서 의미를 이해하고, 말해본 뒤 한글 뜻을 펼쳐 확인해요.</p><div class="sessionNav"><button data-session="am" class="'+(view==="am"?"active":"")+'">☀️ 오전 6:00<br><small>신규 10단어</small></button><button data-session="pm" class="'+(view==="pm"?"active":"")+'">🌙 오후 6:00<br><small>다른 신규 10단어</small></button></div><div class="meter" aria-label="오늘 공부 진행률"><div style="width:'+sessionProgress(l)+'%"></div></div><p class="small muted">오늘 학습 완료 '+sessionProgress(l)+'% · 학습 기록은 이 브라우저에 저장돼요.</p></div>';
